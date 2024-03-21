@@ -9,6 +9,16 @@ from tmdbhelper.lib.addon.logger import kodi_log
 from tmdbhelper.lib.items.router import Router
 from threading import Thread
 
+import xbmc
+import xbmcaddon
+import xbmcgui
+
+ADDON_SETTINGS = xbmcaddon.Addon()
+ID = ADDON_SETTINGS.getAddonInfo('id') 
+
+def log(msg, level=xbmc.LOGDEBUG):
+        xbmc.log(msg='[{addon}]: {msg}'.format(addon=ID, msg=msg), level=level)
+
 
 PREFIX_PATH = 'Path.'
 PREFIX_QUERY = 'Query'
@@ -33,6 +43,8 @@ def _configure_path(path):
 
 def get_listitem(path):
     try:
+        # TODO JON
+        log("JON *manager.py*.get_listitem")
         _path = path.replace('plugin://plugin.video.themoviedb.helper/?', '')  # _path = f"info=details&tmdb_type={tmdb_type}&tmdb_id={tmdb_id}"
         return Router(-1, _path).get_directory(items_only=True)[0].get_listitem()
     except (TypeError, IndexError, KeyError, AttributeError, NameError):

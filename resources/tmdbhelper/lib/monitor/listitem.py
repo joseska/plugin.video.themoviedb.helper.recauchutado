@@ -133,7 +133,7 @@ class ListItemMonitor(CommonMonitorFunctions):
             self.get_infolabel('dbtype', position),
             self.get_infolabel('dbid', position),
             self.get_infolabel('IMDBNumber', position),
-            # INI JON - AÃ±adida la primera condiciÃ³n "self.get_infolabel('property(titulo)', position) or "
+            # INI JON - Añadida la primera condición "self.get_infolabel('property(titulo)', position) or "
             # self.get_infolabel('title', position) or self.get_infolabel('label', position),
             self.get_infolabel('property(Titulo)', position) or self.get_infolabel('title', position) or self.get_infolabel('label', position),
             self.get_infolabel('property(Titulo)', position) or self.get_infolabel('tvshowtitle', position),

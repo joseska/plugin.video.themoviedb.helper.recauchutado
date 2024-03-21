@@ -77,10 +77,10 @@ class ListItemDetails():
 
     @property
     def query(self):
-        # JON (No parece tener efecto) AÃ±adida lÃ­nea para que 'query' se informe con el Titulo de la serie
-        # query = self.get_infolabel('Property(Titulo)')
-        # if not query:
-        query = self.get_infolabel('TvShowTitle')
+        # JON (No parece tener efecto) Añadida línea para que 'query' se informe con el Titulo de la serie
+        query = self.get_infolabel('Property(Titulo)')
+        if not query:
+            query = self.get_infolabel('TvShowTitle')
         if not query and self._dbtype in ['movies', 'tvshows', 'actors', 'sets', 'multi']:
             query = self.get_infolabel('Title') or self.get_infolabel('Label')
         return query
@@ -107,12 +107,12 @@ class ListItemDetails():
             return
         if self._dbtype not in ['movies', 'tvshows']:
             return
-        imdb_id = self.get_infolabel('IMDBNumber') or self.get_infolabel('UniqueId(imdb)') or ''
+        imdb_id = self.get_infolabel('UniqueId(imdb)') or self.get_infolabel('IMDBNumber') or ''
         return imdb_id if imdb_id.startswith('tt') else ''
 
     @property
     def tmdb_id(self):
-        # JON - Primer bloque comentado, original. Segundo bloque, descomentado, aÃ±adidas las "self.get_infolabel('IMDBNumber') or".
+        # JON - Primer bloque comentado, original. Segundo bloque, descomentado, añadidas las "self.get_infolabel('IMDBNumber') or".
         
         # if self._dbtype in ['movies', 'tvshows']:
         #     return self.get_infolabel('UniqueId(tmdb)')
@@ -127,7 +127,7 @@ class ListItemDetails():
         #         trakt_type='episode',
         #         season_episode_check=(self._season, self._episode,))
         
-         # JON - Esto hace que se obtenga la informaciÃ³n de TMDB para una serie o un elemento de una serie.
+        # JON - Esto hace que se obtenga la información de TMDB para una serie o un elemento de una serie.
         if self._dbtype in ['movies', 'tvshows']:
             return self.get_infolabel('IMDBNumber') or self.get_infolabel('UniqueId(tmdb)')
 
@@ -139,7 +139,7 @@ class ListItemDetails():
             return self.get_infolabel('IMDBNumber') or self.get_infolabel('UniqueId(tvshow.tmdb)') or self._parent.get_tmdb_id_parent(
                 tmdb_id=self.get_infolabel('IMDBNumber') or self.get_infolabel('UniqueId(tmdb)'),
                 trakt_type='episode',
-                season_episode_check=(self._season, self._episode,)) 
+                season_episode_check=(self._season, self._episode,))
 
     @property
     def tmdb_type(self):
