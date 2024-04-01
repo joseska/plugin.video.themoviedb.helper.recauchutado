@@ -129,15 +129,15 @@ class ListItemDetails():
         
         # JON - Esto hace que se obtenga la información de TMDB para una serie o un elemento de una serie.
         if self._dbtype in ['movies', 'tvshows']:
-            return self.get_infolabel('IMDBNumber') or self.get_infolabel('UniqueId(tmdb)')
+            return self.get_infolabel('UniqueId(tmdb)') or self.get_infolabel('IMDBNumber')
 
         if self._dbtype == 'seasons':
             # TODO: Trakt lookup of TMDb ID for season similar to episodes
-            return self.get_infolabel('IMDBNumber') or self.get_infolabel('UniqueId(tvshow.tmdb)')
+            return self.get_infolabel('UniqueId(tvshow.tmdb)') or self.get_infolabel('UniqueId(tmdb)') or self.get_infolabel('IMDBNumber')
 
         if self._dbtype == 'episodes':
-            return self.get_infolabel('IMDBNumber') or self.get_infolabel('UniqueId(tvshow.tmdb)') or self._parent.get_tmdb_id_parent(
-                tmdb_id=self.get_infolabel('IMDBNumber') or self.get_infolabel('UniqueId(tmdb)'),
+            return self.get_infolabel('UniqueId(tvshow.tmdb)') or self.get_infolabel('UniqueId(tmdb)') or self.get_infolabel('IMDBNumber') or self._parent.get_tmdb_id_parent(
+                tmdb_id=self.get_infolabel('UniqueId(tmdb)') or self.get_infolabel('IMDBNumber'),
                 trakt_type='episode',
                 season_episode_check=(self._season, self._episode,))
 

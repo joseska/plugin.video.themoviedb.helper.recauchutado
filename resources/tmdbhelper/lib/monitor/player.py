@@ -73,6 +73,7 @@ class PlayerMonitor(Player, CommonMonitorFunctions):
         self.total_time = self.getTotalTime()
         self.dbtype = info_tag.getMediaType()
         self.dbid = info_tag.getDbId()
+        # JON - ID de IMDB sea pelicula o no.
         self.imdb_id = info_tag.getIMDBNumber() #if self.dbtype == 'movie' else None
         # TODO JON
         self.query = info_tag.getTVShowTitle() if self.dbtype == 'episode' else info_tag.getTitle()
@@ -80,9 +81,9 @@ class PlayerMonitor(Player, CommonMonitorFunctions):
         self.epyear = info_tag.getYear() if self.dbtype == 'episode' else None
         self.season = info_tag.getSeason() if self.dbtype == 'episode' else None
         self.episode = info_tag.getEpisode() if self.dbtype == 'episode' else None
-
+		# JON - Para episodios y para temporadas, no tomamos solo el UniqueID de 'tvshow.tmdb', también tomamos el de 'tmdb' o el IMDBNumber.
         if self.dbtype == 'episode':
-            show_tmdb_id = info_tag.getUniqueID('tvshow.tmdb') or info_tag.getIMDBNumber()
+            show_tmdb_id = info_tag.getUniqueID('tvshow.tmdb') or info_tag.getUniqueID('tmdb') or info_tag.getIMDBNumber()
             if show_tmdb_id:
                 self.tmdb_id = show_tmdb_id
             else:

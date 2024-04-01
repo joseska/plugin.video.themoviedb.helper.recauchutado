@@ -15,7 +15,7 @@
                 </setting>
                 <setting id="language" type="integer" label="32005" help="32419">
                     <level>0</level>
-                    <default>20</default>
+                    <default>18</default>
                     <constraints>
                         <options>
                             <option label="30000">0</option>
@@ -108,7 +108,7 @@
             <group id="3" label="32401">
                 <setting id="tmdb_details" type="boolean" label="32402" help="">
                     <level>0</level>
-                    <default>true</default>
+                    <default>false</default>
                     <control type="toggle"/>
                 </setting>
                 <setting id="artwork_quality" type="integer" label="32420" help="">
